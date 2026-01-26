@@ -28,7 +28,7 @@ const register = async (req, res) => {
     });
 
     // Generate JWT Token
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, res);
 
     res.status(201).json({
         status: "success",
@@ -63,7 +63,7 @@ const login = async (req, res) => {
     }
 
     // Generate JWT Token
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, res);
 
     res.status(201).json({
         status: "success",
@@ -77,4 +77,16 @@ const login = async (req, res) => {
     });
 };
 
-export { register, login };
+const logout = async (req, res) => {
+    // Logout by setting the JWT Token to null 
+    res.cookie("jwt", "", {
+        httpOnly: true,
+        expires: new Date(0),
+    });
+    res.status(200).json({
+        status: "success",
+        message: "Logged out successfully",
+    });
+};
+
+export { register, login, logout };
