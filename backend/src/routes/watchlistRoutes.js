@@ -4,8 +4,9 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.use(authMiddleware);
+//! Sets the middleware to every request
+//router.use(authMiddleware); 
 
-router.post("/", addToWatchlist);
+router.post("/", authMiddleware, addToWatchlist);
 
 export default router

@@ -10,7 +10,7 @@ export const authMiddleware = async (req, res, next) => {
 
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         token = req.headers.authorization.split(" ")[1]; // Split into ["Bearer", "TOKEN"]
-    } else if (req.cookies.jwt) {
+    } else if (req.cookies?.jwt) {
         token = req.cookies.jwt;
     }
 
