@@ -1,12 +1,13 @@
 import express from "express";
-import { addToWatchlist } from "../controllers/watchlistController.js";
+import { addToWatchlist, removeFromWatchlist } from "../controllers/watchlistController.js"; // prettier-ignore
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-//! Sets the middleware to every request
-//router.use(authMiddleware); 
+router.use(authMiddleware); //! Sets the auth middleware to every route
 
-router.post("/", authMiddleware, addToWatchlist);
+router.post("/", addToWatchlist);
 
-export default router
+router.delete("/:id", removeFromWatchlist);
+
+export default router;
